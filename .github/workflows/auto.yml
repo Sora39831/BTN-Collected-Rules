@@ -73,9 +73,10 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions"
           
-          git add ./List/*
-          git add ./Collection/*
-          git add ./CIDR/*
+          #git add ./List/*
+          #git add ./Collection/*
+          #git add ./CIDR/*
+          git add .
           
           if git diff-index --quiet HEAD; then
             echo "No changes to commit"
