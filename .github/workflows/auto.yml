@@ -71,6 +71,8 @@ jobs:
           git checkout -b $BRANCH_NAME
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions"
+
+          git pull origin main
           
           git add ./List/*
           git add ./Collection/*
