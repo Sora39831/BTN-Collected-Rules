@@ -64,7 +64,7 @@ jobs:
       - name: Set up branch name
         id: vars
         run: |
-          TIMESTAMP=$(date +'%H%M%S')
+          TIMESTAMP=$(TZ='Asia/Shanghai' date +'%H%M%S')
           echo "BRANCH_NAME=$(date +'%Y-%m-%d')-$TIMESTAMP" >> $GITHUB_ENV
         
       - name: Commit changes
