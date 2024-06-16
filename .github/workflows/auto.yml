@@ -38,7 +38,7 @@ jobs:
         run: |
           mkdir -p List
           mv \
-          "0xde-0xad-0-be-0-ef.txt" \
+          "0xde-0xad-0xbe-0xef.txt" \
           "123pan.txt" \
           "dt_torrent.txt" \
           "go.torrent dev 20181121.txt" \
