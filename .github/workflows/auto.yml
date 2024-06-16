@@ -22,7 +22,7 @@ jobs:
       - name: 整理全部IP
         run: |
           mkdir -p Collection
-          find . -type f -name "*.txt" -not -name "ipv4_all.txt" -not -name "ipv6_all.txt" -not -name "IP_all.txt" -exec cat {} + | sort | uniq > Collection/ipv4_6.txt
+          find . -type f -name "*.txt" -not -name "multi-dial.txt" -not -name "ipv4_all.txt" -not -name "ipv6_all.txt" -not -name "IP_all.txt" -exec cat {} + | sort | uniq > Collection/ipv4_6.txt
 
       - name: 分离IPv4
         run: |
