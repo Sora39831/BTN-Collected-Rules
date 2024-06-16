@@ -1,0 +1,72 @@
+name: IP合集
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  StatisticalIP:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5.1.0
+          
+      - name: 整理全部IP
+        run: |
+          mkdir -p Collection
+          find . -type f -name "*.txt" -not -name "ipv4_all.txt" -not -name "ipv6_all.txt" -not -name "IP_all.txt" -exec cat {} + | sort | uniq > Collection/ipv4_6.txt
+
+      - name: 分离IPv4
+        run: |
+          cd Collection
+          grep -E "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$" ipv4_6.txt > ipv4.txt
+      
+      - name: 分离IPv6
+        run: |
+          cd Collection
+          grep -vFf ipv4.txt ipv4_6.txt > ipv6.txt
+      
+
+      - name: 安装python运行环境
+        uses: actions/setup-python@v5.1.0
+
+      - name: 安装依赖_ipaddress
+        run: |
+          python -m pip install --upgrade pip
+          pip install ipaddress
+
+      - name: 使用Python脚本处理得到CIDR
+        run: |
+          mkdir -p CIDR
+          python CIDR.py -i "${{ github.workspace }}/Collection/ipv4.txt" -o "${{ github.workspace }}/CIDR"
+          python CIDR.py -i "${{ github.workspace }}/Collection/ipv6.txt" -o "${{ github.workspace }}/CIDR"
+          python CIDR.py -i "${{ github.workspace }}/Collection/ipv4_6.txt" -o "${{ github.workspace }}/CIDR"
+          
+      - name: Set up branch name
+        id: vars
+        run: |
+          echo "BRANCH_NAME=$(date +'%Y-%m-%d')-$(git rev-list --count HEAD)" >> $GITHUB_ENV
+        
+      - name: Commit changes
+        run: |
+          git checkout -b $BRANCH_NAME
+          git config --local user.email "action@github.com"
+          git config --local user.name "github-actions"
+          
+          git add ./Collection/*
+          git add ./CIDR/*
+          
+          if git diff-index --quiet HEAD; then
+            echo "No changes to commit"
+          else
+            git commit -m "自动生成[skip ci]"
+            git push --set-upstream origin $BRANCH_NAME
+          fi
