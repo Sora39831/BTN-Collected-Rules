@@ -64,8 +64,8 @@ jobs:
       - name: Set up branch name
         id: vars
         run: |
-          COUNT=$(($(git rev-list --count HEAD) + 1))
-          echo "BRANCH_NAME=$(date +'%Y-%m-%d')-$COUNT" >> $GITHUB_ENV
+          TIMESTAMP=$(date +'%H%M%S')
+          echo "BRANCH_NAME=$(date +'%Y-%m-%d')-$TIMESTAMP" >> $GITHUB_ENV
         
       - name: Commit changes
         run: |
