@@ -79,5 +79,5 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "自动生成[skip ci]"
-            git push --set-upstream origin $BRANCH_NAME
+            git push origin auto
           fi
