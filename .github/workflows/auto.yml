@@ -59,12 +59,6 @@ jobs:
           mkdir -p CIDR
           python CIDR.py -i "${{ github.workspace }}/Collection/ipv4.txt" -o "${{ github.workspace }}/CIDR"
           python CIDR.py -i "${{ github.workspace }}/Collection/ipv6.txt" -o "${{ github.workspace }}/CIDR"
-          
-      #- name: Set up branch name
-      #  id: vars
-      #  run: |
-      #    TIMESTAMP=$(TZ='Asia/Shanghai' date +'%H%M%S')
-      #    echo "BRANCH_NAME=$(date +'%Y-%m-%d')-$TIMESTAMP" >> $GITHUB_ENV
         
       - name: Commit changes
         run: |
