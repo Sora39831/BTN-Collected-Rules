@@ -73,5 +73,5 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "自动生成[skip ci]"
-            git push origin auto
+            git push -f origin auto
           fi
