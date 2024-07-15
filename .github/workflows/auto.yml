@@ -44,6 +44,7 @@ jobs:
           "go.torrent dev 20181121.txt" \
           "hp_torrent.txt" \
           "multi-dial.txt" \
+          "gitlab.i.ljyun.cn-hangzhou-monitoring.txt" \
           List/
 
       - name: 安装python运行环境
