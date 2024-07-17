@@ -45,6 +45,7 @@ jobs:
           "hp_torrent.txt" \
           "multi-dial.txt" \
           "gitlab.i.ljyun.cn-hangzhou-monitoring.txt" \
+          "progress-rewind.txt" \
           List/
 
       - name: 安装python运行环境
