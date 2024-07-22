@@ -32,7 +32,7 @@ jobs:
       - name: 分离IPv6
         run: |
           cd Collection
-          grep -vFf ipv4.txt ipv4_6.txt > ipv6.txt
+          grep -E (([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|(::[0-9a-fA-F]{1,4}(:[0-9a-fA-F]{1,4}){0,5})|([0-9a-fA-F]{1,4}::([0-9a-fA-F]{1,4}){0,6})|((([0-9a-fA-F]{1,4}:){1,6}(:[0-9a-fA-F]{1,4}){1,6}))) > ipv6.txt
       
       - name: 优化目录
         run: |
