@@ -32,7 +32,7 @@ jobs:
       - name: 分离IPv6
         run: |
           cd Collection
-          grep -E (([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|(::[0-9a-fA-F]{1,4}(:[0-9a-fA-F]{1,4}){0,5})|([0-9a-fA-F]{1,4}::([0-9a-fA-F]{1,4}){0,6})|((([0-9a-fA-F]{1,4}:){1,6}(:[0-9a-fA-F]{1,4}){1,6}))) > ipv6.txt
+          grep -E "(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|(::[0-9a-fA-F]{1,4}(:[0-9a-fA-F]{1,4}){0,5})|([0-9a-fA-F]{1,4}::([0-9a-fA-F]{1,4}){0,6})|((([0-9a-fA-F]{1,4}:){1,6}(:[0-9a-fA-F]{1,4}){1,6})))" > ipv6.txt
       
       - name: 优化目录
         run: |
@@ -66,8 +66,8 @@ jobs:
         run: |
           git fetch origin
           git checkout -b auto || git checkout auto
-          git config --local user.email "action@github.com"
-          git config --local user.name "github-actions"
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           
           git add .
           
